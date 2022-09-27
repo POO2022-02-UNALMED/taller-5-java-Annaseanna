@@ -1,50 +1,51 @@
 package zooAnimales;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Ave extends Animal {
-
-    public static int halcones;
-    public static int aguilas;
-    private final static List<Ave> listado = new ArrayList<>();
-
+    static private ArrayList<Ave> listado = new ArrayList<Ave>();
+    static public int halcones;
+    static public int aguilas;
     private String colorPlumas;
 
-    public Ave(String nombre, int edad, String habitat, String genero, String colorPlumas) {
-        super(nombre, edad, habitat, genero);
-        this.colorPlumas = colorPlumas;
-        listado.add(this);
-    }
-
     public Ave() {
-        listado.add(this);
+        Ave.listado.add(this);
+    }
+    public Ave(String nombre,int edad,String habitat,String genero,String colorplumas) {
+        this.nombre = nombre;
+        this.edad = edad;
+        this.habitat = habitat;
+        this.genero = genero;
+        this.colorPlumas = colorplumas;
+        Ave.listado.add(this);
     }
 
-    public static int cantidadAves() {
-        return listado.size();
+    public String getColorPlumas(){
+        return this.colorPlumas;
+    }
+    public void getColorPlumas(String c){
+        colorPlumas = c;
     }
 
-    @Override
     public String movimiento() {
         return "volar";
     }
 
-    public static Ave crearHalcon(String nombre, int edad, String genero) {
+    static public ArrayList<Ave> getListado(){
+        return Ave.listado;
+    }
+
+    static public int cantidadAves() {
+        return Ave.getListado().size();
+    }
+
+    static public Ave crearHalcon(String nombre,int edad,String genero) {
         halcones++;
-        Ave halcon = new Ave(nombre, edad, "montanas", genero, "cafe glorioso");
-        listado.add(halcon);
-        return halcon;
+        return new Ave(nombre,edad,"montanas",genero,"cafe glorioso");
     }
 
-    public static Ave crearAguila(String nombre, int edad, String genero) {
+    static public Ave crearAguila(String nombre,int edad,String genero) {
         aguilas++;
-        Ave aguila = new Ave(nombre, edad, "montanas", genero, "blanco y amarillo");
-        listado.add(aguila);
-        return aguila;
-    }
-
-    public String getColorPlumas() {
-        return colorPlumas;
+        return new Ave(nombre,edad,"montanas",genero,"blanco y amarillo");
     }
 }
